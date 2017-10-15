@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 To @ explore strange new worlds,
 To sek out new life and new civilizations?
 1-4ÐÞ¸Ä
 ÔÚB2 2-7
+=======
+To @ explore strange new worlds,
+To sek out new life and new civilizations?
+²âÊÔ³·Ïú
+>>>>>>> dd819bf506d8c0223765ad40987d7f4aa1827448

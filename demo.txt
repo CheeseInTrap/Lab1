@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Since I go to primary school,I walk to my #school with my friends.It is not far from my home.in the morning, the road is cleant,I can see it all the way.I also see my school.I go to the shop,I can see my friends in my school.
 ÔÚB2 2-7
+=======
+Since I go to primary school,I walk to my #school with my friends.It is not far from my home.in the morning, the road is cleant,I can see it all the way.I also see my school.I go to the shop,I can see my friends in my school.Hello World.
+>>>>>>> dd819bf506d8c0223765ad40987d7f4aa1827448

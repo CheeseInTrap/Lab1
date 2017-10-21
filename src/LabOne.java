@@ -1,4 +1,4 @@
-package lab4;
+
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -16,8 +16,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import lab4.FileManager;
-import lab4.GraphManager;
 
 public class LabOne {
   

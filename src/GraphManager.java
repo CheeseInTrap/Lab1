@@ -1,4 +1,3 @@
-package lab4;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;

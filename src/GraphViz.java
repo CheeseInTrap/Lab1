@@ -294,12 +294,12 @@ public class GraphViz {
   /**
    * The dir. where temporary files will be created.
   */
-  private static String TEMP_DIR = "E:\\eclipse workplace new\\Lab4";
+  private static String TEMP_DIR = "D:\\A_ruanjian\\Lab1";
 
   /**
    * Where is your dot program located? It will be called externally.
   */
-  private static String DOT = "C:\\Users\\jh\\Desktop\\release\\bin\\dot.exe";
+  private static String DOT = "D:\\A_ruanjian\\Lab1\\release\\bin\\dot.exe";
 
   /**
    * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.

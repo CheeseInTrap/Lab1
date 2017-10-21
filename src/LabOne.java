@@ -1,4 +1,3 @@
-
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -46,7 +45,7 @@ public class LabOne {
    * @param args mainº¯Êý²ÎÊý
    */
   
-  public static void main(final String[] args) {
+  public static void main(String[] args) {
     
     init();
     button1.addActionListener(new ActionListener() {

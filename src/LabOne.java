@@ -1,4 +1,4 @@
-package lab4;
+
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.Toolkit;

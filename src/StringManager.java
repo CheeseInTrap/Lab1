@@ -150,7 +150,7 @@ public class StringManager {
     String bridgeWord;
     int i = 0;
     for (i = 0; i < textArray.length - 1; i++) {
-      bridgeWord = LabOne.sm.queryBridgeWords(textArray[i], textArray[i + 1]);
+      bridgeWord = queryBridgeWords(textArray[i], textArray[i + 1]);
       System.out.println(textArray[i] + "  " + textArray[i + 1]);
       outputText = outputText + textArray[i] + " ";
       if (bridgeWord != null) {

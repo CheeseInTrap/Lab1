@@ -102,47 +102,88 @@ public class StringManager {
    * @return bridgewords.
    */
   public String queryBridgeWords(final String word1, final String word2) {
-    //ArrayList<String> bridgewords = new ArrayList<>();
-    //System.out.println(word1+" "+word2);
-    if (mapStringToPos.get(word1) == null || mapStringToPos.get(word2) == null) {
-      if (mapStringToPos.get(word1) == null && mapStringToPos.get(word2) != null) {
-        System.out.println("No " + word1 + " in the graph!");
-      } else if (mapStringToPos.get(word1) != null && mapStringToPos.get(word2) == null) {
-        System.out.println("No " + word2 + " in the graph!");
-      } else {
-        System.out.println("No " + word1 + " and " + word2 + " in the graph!");
-      }
-      return null;
-    }
-    int x = mapStringToPos.get(word1);
-    int y = mapStringToPos.get(word2);
-    ArrayList<String> bridgewords = new ArrayList<>();
-    for (int z = 0; z < mapStringToPos.size(); z++) {
-      if (wordMatrix[x][z] != 0 && wordMatrix[z][y] != 0) {
-        bridgewords.add(strs.get(z));
-      }
-    }
-    if (bridgewords.isEmpty()) {
-      System.out.println("No bridge words from " + word1 + " to " + word2 + " !");
-      return null;
-    } else if (bridgewords.size() == 1) {
-      System.out.print("The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0));
-      return bridgewords.get(0);
-    } else {
-      System.out.print("The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0));
-      for (int i = 1; i < bridgewords.size() - 1; i++) {
-        System.out.print("," + bridgewords.get(i));
-      }
-      System.out.print(" and " + bridgewords.get(bridgewords.size() - 1));
-      System.out.print("\n");
-      return bridgewords.get(0);
-    }
-  }
+	    //ArrayList<String> bridgewords = new ArrayList<>();
+	    //System.out.println(word1+" "+word2);
+		
+	    if (mapStringToPos.get(word1) == null || mapStringToPos.get(word2) == null) {
+	      if (mapStringToPos.get(word1) == null && mapStringToPos.get(word2) != null) {
+	        System.out.println("No " + word1 + " in the graph!");
+	      } else if (mapStringToPos.get(word1) != null && mapStringToPos.get(word2) == null) {
+	        System.out.println("No " + word2 + " in the graph!");
+	      } else {
+	        System.out.println("No " + word1 + " and " + word2 + " in the graph!");
+	      }
+	      return null;
+	    }
+	    int x = mapStringToPos.get(word1);
+	    int y = mapStringToPos.get(word2);
+	    ArrayList<String> bridgewords = new ArrayList<>();
+	    for (int z = 0; z < mapStringToPos.size(); z++) {
+	      if (wordMatrix[x][z] != 0 && wordMatrix[z][y] != 0) {
+	        bridgewords.add(strs.get(z));
+	      }
+	    }
+	    if (bridgewords.isEmpty()) {
+	      System.out.println("No bridge words from " + word1 + " to " + word2 + " !");
+	      return null;
+	    } else if (bridgewords.size() == 1) {
+	      System.out.println("The bridge word from " + word1 + " to " + word2 + " is:" + bridgewords.get(0));
+	      return bridgewords.get(0);
+	    } else {
+	      System.out.print("The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0));
+	      for (int i = 1; i < bridgewords.size() - 1; i++) {
+	        System.out.print("," + bridgewords.get(i));
+	      }
+	      System.out.print(" and " + bridgewords.get(bridgewords.size() - 1));
+	      System.out.print("\n");
+	      return bridgewords.get(0);
+	    }
+	  }
   
   /** 
    * @param inputText.
    * @return newText
    */
+  public String BridgeWords(final String word1, final String word2) {
+	    if (mapStringToPos.get(word1) == null || mapStringToPos.get(word2) == null) {
+	      if (mapStringToPos.get(word1) == null && mapStringToPos.get(word2) != null) {
+	        System.out.println("No " + word1 + " in the graph!");
+	        return "No " + word1 + " in the graph!";
+	      } else if (mapStringToPos.get(word1) != null && mapStringToPos.get(word2) == null) {
+	        System.out.println("No " + word2 + " in the graph!");
+	        return "No " + word2 + " in the graph!";
+	      } else {
+	        System.out.println("No " + word1 + " and " + word2 + " in the graph!");
+	        return "No " + word1 + " and " + word2 + " in the graph!";
+	      }
+	    }
+	    int x = mapStringToPos.get(word1);
+	    int y = mapStringToPos.get(word2);
+	    ArrayList<String> bridgewords = new ArrayList<>();
+	    for (int z = 0; z < mapStringToPos.size(); z++) {
+	      if (wordMatrix[x][z] != 0 && wordMatrix[z][y] != 0) {
+	        bridgewords.add(strs.get(z));
+	      }
+	    }
+	    if (bridgewords.isEmpty()) {
+	      System.out.println("No bridge words from " + word1 + " to " + word2 + "!");
+	      return "No bridge words from " + word1 + " to " + word2 + "!";
+	    } else if (bridgewords.size() == 1) {
+	      System.out.println("The bridge word from " + word1 + " to " + word2 + " is:" + bridgewords.get(0));
+	      return "The bridge word from " + word1 + " to " + word2 + " is:" + bridgewords.get(0);
+	    } else {
+	      System.out.print("The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0));
+	      String str="The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0);
+	      for (int i = 1; i < bridgewords.size() - 1; i++) {
+	        System.out.print("," + bridgewords.get(i));
+	        str=str+"," + bridgewords.get(i);
+	      }
+	      System.out.print(" and " + bridgewords.get(bridgewords.size() - 1));
+	      str=str+" and " + bridgewords.get(bridgewords.size() - 1);
+	      System.out.print("\n");
+	      return str;
+	    }
+	  }
   
   public String generateNewText(final String inputText) {
     String outputText = "";

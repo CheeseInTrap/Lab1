@@ -1,0 +1,44 @@
+黑盒测试：
+（查询桥接词）
+输入：
+1.（word1：）with
+（word2：）friends
+
+2.（word1：）to
+（word2：）school
+
+3.（word1：）your
+（word2：）school
+
+4.（word1：）to
+（word2：）church
+
+5.（word1：）your
+（word2：）church
+
+6.（word1：）also
+（word2：）school
+
+7.（word1：）in
+（word2：）school
+
+
+预期结果：
+1.The bridge word from with to friends is:my
+2.The bridge words from to to school are:primary and my
+3.No your in the graph!
+4.No church in the graph!
+5.No your and church in the graph!
+6.No bridge words from also to school!
+7.The bridge words from in to school are:primary,my and middle
+
+白盒测试：
+1 school
+2 i like school
+3 i see my shoes
+4 null
+预期结果：
+1 school
+2 i like school
+3 i can see my shoes
+4 null

@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -21,6 +23,11 @@ import javax.swing.JTextField;
 import control.ShowDirectedGraphControl;
 import control.TextControl;
 import entity.Text;
+import form.FindMinDistForm;
+import form.GenerateNewTextForm;
+import form.QueryBridgeWordsForm;
+import form.RandomWalkForm;
+import form.ShowDirectedGraphForm;
 
 public class LabOne {
   
@@ -89,34 +96,26 @@ public class LabOne {
 
       @Override
       public void actionPerformed(final ActionEvent event) {
-
-    	  TextControl.deleteFile("dotsource.dot");
-        // TODO Auto-generated method stub
-        JOptionPane.showMessageDialog(null, "成功", "提示", 2);
-        file = jfc.getSelectedFile();
-        if (file  != null) {
-          sm = new Text();
-          text = TextControl.readFile(file);
-          text = sm.StringFormat(text);
-          DotStr = sm.createDotFormat(text);
-          System.out.println(text);
-          System.out.println(DotStr);
-
+      	  TextControl.deleteFile("dotsource.dot");
+          // TODO Auto-generated method stub
+          JOptionPane.showMessageDialog(null, "成功", "提示", 2);
+          file = jfc.getSelectedFile();
+          if (file  != null) {
+            sm = new Text();
+            text = TextControl.readFile(file);
+            text = sm.StringFormat(text);
+            DotStr = sm.createDotFormat(text);
+            System.out.println(text);
+            System.out.println(DotStr);
         }
       }
-
     });
 
     button3.addActionListener(new ActionListener() {
 
       @Override
       public void actionPerformed(final ActionEvent arg0) {
-        ShowDirectedGraphControl.showDirectedGraph(DotStr, "DotGraph");
-        try {
-        	ShowDirectedGraphControl.showImage(file.getParent() + "\\DotGraph.jpg");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+    	  new ShowDirectedGraphForm(DotStr,file);
 
       }
     });
@@ -126,56 +125,7 @@ public class LabOne {
       @Override
       public void actionPerformed(final ActionEvent event) {
 
-        final JFrame frameQuery = new JFrame();
-
-        final JTabbedPane paneQuery = new JTabbedPane();
-        frameQuery.setContentPane(paneQuery);
-        final Container conQuery = new Container();
-
-        final JLabel labelWord1 = new JLabel("单词1");
-        final JLabel labelWord2 = new JLabel("单词2");
-        final JTextField word1 = new JTextField();
-        final JTextField word2 = new JTextField();
-        final JTextField queryResult = new JTextField();
-        final JButton buttonConfirm = new JButton("确定");
-
-
-        labelWord1.setBounds(10,10,70,20);
-        labelWord2.setBounds(10,40,70,20);
-        word1.setBounds(70,10,150,20);
-        word2.setBounds(70,40,150,20);
-        queryResult.setBounds(60,80,150,20);
-        buttonConfirm.setBounds(60, 110, 50, 20);
-        
-        conQuery.add(labelWord1);
-        conQuery.add(labelWord2);
-        conQuery.add(word1);
-        conQuery.add(word2);
-        conQuery.add(queryResult);
-        conQuery.add(buttonConfirm);
-
-
-        paneQuery.add("查询桥接词",conQuery);
-
-        frameQuery.setVisible(true);
-        frameQuery.setSize(300, 400);
-
-        buttonConfirm.addActionListener(new ActionListener() {
-
-          @Override
-          public void actionPerformed(final ActionEvent arg0) {
-            // TODO Auto-generated method stub
-            final String wd1 = word1.getText().toString();
-            final String wd2 = word2.getText().toString();
-            //System.out.println(wd1+" "+wd2);
-            final String result = sm.queryBridgeWords(wd1, wd2);
-            if (result == null) {
-              queryResult.setText("没有桥接词");
-            }
-            queryResult.setText(result);
-          }
-
-        });
+        new QueryBridgeWordsForm(sm);
 
       }
 
@@ -186,61 +136,7 @@ public class LabOne {
       @Override
       public void actionPerformed(final ActionEvent event) {
 
-        final JFrame frameGenerate = new JFrame("生成新文本");
-        final JTabbedPane paneGenerate = new JTabbedPane();
-        final Container container = new Container();
-        final JTextArea inputText = new JTextArea(8,20);
-        final JTextArea outputText = new JTextArea(8,20);
-
-        frameGenerate.setVisible(true);
-        frameGenerate.setSize(300, 400);
-        frameGenerate.setContentPane(paneGenerate);
-
-        final JButton button1 = new JButton("确定");
-        
-        final JLabel label1 = new JLabel();
-        final JLabel label2 = new JLabel();
-        final JScrollPane scrollPane1 = new JScrollPane(inputText);
-        final JScrollPane scrollPane2 = new JScrollPane(outputText);
-
-        inputText.setLineWrap(true);
-        outputText.setLineWrap(true);
-        inputText.setWrapStyleWord(true);
-        outputText.setWrapStyleWord(true);
-        final double lengthx = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        final double lengthy = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        frame.setLocation(new Point((int)(lengthx / 2) - 150, (int)(lengthy / 2) - 150));
-        //container.add(inputText);
-        //container.add(outputText);
-
-        label1.setBounds(10,10,80,20);
-        label1.setText("输入文本");
-        label2.setBounds(10, 150, 80, 20);
-        label2.setText("输出文本");
-        inputText.setBounds(80, 10, 180, 170);
-        outputText.setBounds(80, 150, 180, 170);
-        scrollPane1.setBounds(80, 10, 180, 100);
-        scrollPane2.setBounds(80, 150, 180, 100);
-        button1.setBounds(80, 300, 80, 20);
-
-        container.add(button1);
-        container.add(label1);
-        container.add(label2);
-        container.add(scrollPane1);
-        container.add(scrollPane2);
-
-        paneGenerate.add("输出新文本", container);
-
-        button1.addActionListener(new ActionListener() {
-
-          @Override
-          public void actionPerformed(final ActionEvent e) {
-            final String input = inputText.getText().toString();
-            System.out.println(input);
-            final String output = sm.generateNewText(input);
-            outputText.setText(output);
-          }
-        });
+    	  new GenerateNewTextForm(sm, frame);
 
 
       }
@@ -251,62 +147,7 @@ public class LabOne {
 
       @Override
       public void actionPerformed(final ActionEvent arg0) {
-        final JFrame frameQuery = new JFrame();
-
-
-        final JTabbedPane paneQuery = new JTabbedPane();
-        frameQuery.setContentPane(paneQuery);
-        final Container conQuery = new Container();
-
-        final JLabel labelWord1 = new JLabel("单词1");
-        final JLabel labelWord2 = new JLabel("单词2");
-        final JTextField word1 = new JTextField();
-        final JTextField word2 = new JTextField();
-        final JTextField queryResult = new JTextField();
-        final JButton buttonConfirm = new JButton("确定");
-
-        labelWord1.setBounds(10,10,70,20);
-        labelWord2.setBounds(10,40,70,20);
-        word1.setBounds(70,10,150,20);
-        word2.setBounds(70,40,150,20);
-        queryResult.setBounds(60,80,150,20);
-        buttonConfirm.setBounds(60, 110, 50, 20);
-
-        conQuery.add(labelWord1);
-        conQuery.add(labelWord2);
-        conQuery.add(word1);
-        conQuery.add(word2);
-        conQuery.add(queryResult);
-        conQuery.add(buttonConfirm);
-
-
-        paneQuery.add("计算两单词最短路径",conQuery);
-
-        frameQuery.setVisible(true);
-        frameQuery.setSize(300, 400);
-
-        buttonConfirm.addActionListener(new ActionListener() {
-
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            final String strw1 =  word1.getText();
-            final String strw2 = word2.getText();
-
-            final String path = sm.calcShortestPath(strw1, strw2);
-            queryResult.setText(path);
-            //System.out.println("最短路径是："+path);
-            //System.out.println("graphstr 是："+StringManager.graphstr);
-
-            ShowDirectedGraphControl.showDirectedGraph(Text.graphstr, "newDotGraph");
-            try {
-            	ShowDirectedGraphControl.showImage(file.getParent() + "\\newDotGraph.jpg");
-            } catch (IOException e1) {
-              // TODO Auto-generated catch block
-              e1.printStackTrace();
-            }
-          }
-
-        });
+    	  new FindMinDistForm(sm, file);
       }
       
     });
@@ -315,33 +156,7 @@ public class LabOne {
 
       @Override
       public void actionPerformed(final ActionEvent event) {
-        final JFrame frameQuery = new JFrame();
-        final JTabbedPane paneQuery = new JTabbedPane();
-        frameQuery.setContentPane(paneQuery);
-        final Container conResult = new Container();
-        paneQuery.add("随机游走", conResult);
-
-        final JTextArea textArea = new JTextArea(8,20);
-        textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
-        textArea.setBounds(80, 10, 180, 170);
-        final JScrollPane jscrollp = new JScrollPane(textArea);
-        conResult.add(jscrollp);
-        conResult.add(textArea);
-        frameQuery.setContentPane(paneQuery);
-        frameQuery.setVisible(true);
-        frameQuery.setSize(300, 400);
-
-
-        final String result = sm.randomWalk();
-        //System.out.println("随机游走的结果是："+result);
-        textArea.setText(result);
-        try {
-          sm.TextToFile(result);
-        } catch (IOException e1) {
-          // TODO Auto-generated catch block
-          e1.printStackTrace();
-        }
+    	  new RandomWalkForm(sm);
       }
 
     });

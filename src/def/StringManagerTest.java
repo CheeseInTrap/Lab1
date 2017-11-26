@@ -1,18 +1,22 @@
+package def;
 import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import entity.Text;
+import control.*;
+
 public class StringManagerTest {
 
-	private static StringManager manager;
+	private static Text manager;
 
 	@Before
 	public void setUp() throws Exception {
 		File file = new File("demo.txt");
-		manager = new StringManager();
-		String text = FileManager.readFile(file);
+		manager = new Text();
+		String text = TextControl.readFile(file);
 		text = manager.StringFormat(text);
 		text = manager.createDotFormat(text);
 	}

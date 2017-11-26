@@ -1,3 +1,4 @@
+/BridgeWordsTest.class
 /FileManager.class
 /GraphManager.class
 /GraphViz.class
@@ -15,4 +16,7 @@
 /LabOne.class
 /StringManager.class
 /StringManagerTest.class
-/BridgeWordsTest.class
+/entity/
+/control/
+/form/
+/def/

@@ -207,7 +207,6 @@ public class Text{
     outputText = outputText + textArray[i];
     return outputText;
   }
-
   /**
    * randomWalk.
    * @return random walk path
@@ -271,7 +270,7 @@ public class Text{
   /**
    * write text to file.
    */
-  //改到控制类了！！！！！！
+
   public void TextToFile(final String str) throws IOException {
     final File fileText = new File("randomWalk.txt");
     FileWriter fileWriter = null;
@@ -286,7 +285,7 @@ public class Text{
   }
 
   
-  //写到Graph类里面了！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+
   // for dijstra implement 
   private static final int INFINITY = 10000;
   static int[] path;

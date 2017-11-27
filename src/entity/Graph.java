@@ -19,194 +19,10 @@ public class Graph{
   static int[][] wordMatrix;
   public static String graphstr;
   
-  /**
-   * @param str.
-   * @return str.
-   */
-  public String StringFormat(String str) {
-    str = str.replaceAll("[^a-zA-Z]"," ");
-    str = str.replaceAll("\\s{2,}", " ");
-    str = str.toLowerCase();
-    return str;
-  }
-  /**
-   * find all the words.
-   */
+
   
-  public  Map<String,Integer> findEnglishNum(String text) {
-    //找出所有的单词  
-    String[] textArray = text.split(" ");  
-    
-    //遍历 记录  
-    Map<String, Integer> map = new HashMap<String, Integer>();  
-    for (int i = 0; i < textArray.length; i++) {  
-      String key = textArray[i];  
-      //转为小写  
-      String key_l = key.toLowerCase();  
-      if (!key_l.equals("")) {  
-        Integer num = map.get(key_l);  
-        if (num == null || num == 0) {  
-          map.put(key_l, 1);  
-        } else if (num > 0) {  
-          map.put(key_l, num + 1);  
-        }  
-      }
-    }  
-    return map;
-  }
-  /**
-   * get the matrix.
-   */
-  
-  public String createDotFormat(String str) {
-    String[] textArray = str.split(" ");
-    int pos = 0;
-    for (int i = 0; i < textArray.length; i++) {  
-      String key = textArray[i];  
-      if (!key.equals(" ")) {  
-        Integer num = mapStringToNum.get(key);  
-        if (num == null || num == 0) {  
-          mapStringToNum.put(key, 1); 
-          mapStringToPos.put(key, pos);
-          pos = pos + 1;
-          strs.add(key);
-        } else if (num > 0) {  
-          mapStringToNum.put(key, num + 1);  
-        }  
-      }
-    }
-    final int wordNum = mapStringToNum.size();
-    wordMatrix = new int[wordNum][wordNum];
-    for (int i = 0; i < wordNum; i++) {
-      for (int j = 0; j < wordNum; j++) {
-        wordMatrix[i][j] = 0;
-      }
-    }
-    //int x,y;
-    for (int i = 0; i < textArray.length - 1; i++) {
-      int x = mapStringToPos.get(textArray[i]);
-      int y = mapStringToPos.get(textArray[i + 1]);
-      wordMatrix[x][y] = wordMatrix[x][y] + 1;
-    }
-    String dotStr = "";
-    for (int i = 0; i < wordNum; i++) {
-      String string = strs.get(i);
-      int x = mapStringToPos.get(string);
-      for (int j = 0; j < wordNum; j++) {
-        if (wordMatrix[x][j] != 0) {
-          dotStr = dotStr + string + "->" + strs.get(j) + "[label=" + "\"" + wordMatrix[x][j] + "\"" + "]" + ";";
-        }
-      }
-    }
-    return dotStr;
-  }
-  
-  /**
-   * 
-   * @param word1.
-   * @param word2.
-   * @return bridgewords.
-   */
-  public String queryBridgeWords(final String word1, final String word2) {
-	    //ArrayList<String> bridgewords = new ArrayList<>();
-	    //System.out.println(word1+" "+word2);
-		
-	    if (mapStringToPos.get(word1) == null || mapStringToPos.get(word2) == null) {
-	      if (mapStringToPos.get(word1) == null && mapStringToPos.get(word2) != null) {
-	        System.out.println("No " + word1 + " in the graph!");
-	      } else if (mapStringToPos.get(word1) != null && mapStringToPos.get(word2) == null) {
-	        System.out.println("No " + word2 + " in the graph!");
-	      } else {
-	        System.out.println("No " + word1 + " and " + word2 + " in the graph!");
-	      }
-	      return null;
-	    }
-	    int x = mapStringToPos.get(word1);
-	    int y = mapStringToPos.get(word2);
-	    ArrayList<String> bridgewords = new ArrayList<>();
-	    for (int z = 0; z < mapStringToPos.size(); z++) {
-	      if (wordMatrix[x][z] != 0 && wordMatrix[z][y] != 0) {
-	        bridgewords.add(strs.get(z));
-	      }
-	    }
-	    if (bridgewords.isEmpty()) {
-	      System.out.println("No bridge words from " + word1 + " to " + word2 + " !");
-	      return null;
-	    } else if (bridgewords.size() == 1) {
-	      System.out.println("The bridge word from " + word1 + " to " + word2 + " is:" + bridgewords.get(0));
-	      return bridgewords.get(0);
-	    } else {
-	      System.out.print("The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0));
-	      for (int i = 1; i < bridgewords.size() - 1; i++) {
-	        System.out.print("," + bridgewords.get(i));
-	      }
-	      System.out.print(" and " + bridgewords.get(bridgewords.size() - 1));
-	      System.out.print("\n");
-	      return bridgewords.get(0);
-	    }
-	  }
-  
-  /** 
-   * @param inputText.
-   * @return newText
-   */
-  public String BridgeWords(final String word1, final String word2) {
-	    if (mapStringToPos.get(word1) == null || mapStringToPos.get(word2) == null) {
-	      if (mapStringToPos.get(word1) == null && mapStringToPos.get(word2) != null) {
-	        System.out.println("No " + word1 + " in the graph!");
-	        return "No " + word1 + " in the graph!";
-	      } else if (mapStringToPos.get(word1) != null && mapStringToPos.get(word2) == null) {
-	        System.out.println("No " + word2 + " in the graph!");
-	        return "No " + word2 + " in the graph!";
-	      } else {
-	        System.out.println("No " + word1 + " and " + word2 + " in the graph!");
-	        return "No " + word1 + " and " + word2 + " in the graph!";
-	      }
-	    }
-	    int x = mapStringToPos.get(word1);
-	    int y = mapStringToPos.get(word2);
-	    ArrayList<String> bridgewords = new ArrayList<>();
-	    for (int z = 0; z < mapStringToPos.size(); z++) {
-	      if (wordMatrix[x][z] != 0 && wordMatrix[z][y] != 0) {
-	        bridgewords.add(strs.get(z));
-	      }
-	    }
-	    if (bridgewords.isEmpty()) {
-	      System.out.println("No bridge words from " + word1 + " to " + word2 + "!");
-	      return "No bridge words from " + word1 + " to " + word2 + "!";
-	    } else if (bridgewords.size() == 1) {
-	      System.out.println("The bridge word from " + word1 + " to " + word2 + " is:" + bridgewords.get(0));
-	      return "The bridge word from " + word1 + " to " + word2 + " is:" + bridgewords.get(0);
-	    } else {
-	      System.out.print("The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0));
-	      String str="The bridge words from " + word1 + " to " + word2 + " are:" + bridgewords.get(0);
-	      for (int i = 1; i < bridgewords.size() - 1; i++) {
-	        System.out.print("," + bridgewords.get(i));
-	        str=str+"," + bridgewords.get(i);
-	      }
-	      System.out.print(" and " + bridgewords.get(bridgewords.size() - 1));
-	      str=str+" and " + bridgewords.get(bridgewords.size() - 1);
-	      System.out.print("\n");
-	      return str;
-	    }
-	  }
-  
-  public String generateNewText(final String inputText) {
-    String outputText = "";
-    final String[] textArray = inputText.split(" ");
-    String bridgeWord;
-    int i = 0;
-    for (i = 0; i < textArray.length - 1; i++) {
-      bridgeWord = queryBridgeWords(textArray[i], textArray[i + 1]);
-      System.out.println(textArray[i] + "  " + textArray[i + 1]);
-      outputText = outputText + textArray[i] + " ";
-      if (bridgeWord != null) {
-        outputText = outputText + bridgeWord + " ";
-      }
-    }
-    outputText = outputText + textArray[i];
-    return outputText;
-  }
+
+
 
   /**
    * randomWalk.
@@ -271,22 +87,10 @@ public class Graph{
   /**
    * write text to file.
    */
-  //改到控制类了！！！！！！
-  public void TextToFile(final String str) throws IOException {
-    final File fileText = new File("randomWalk.txt");
-    FileWriter fileWriter = null;
-    try {
-      fileWriter = new FileWriter(fileText);
-      fileWriter.write(str);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    fileWriter.close();
-  }
+
 
   
-  //写到Graph类里面了！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+
   // for dijstra implement 
   private static final int INFINITY = 10000;
   static int[] path;
@@ -404,4 +208,17 @@ public class Graph{
     System.out.println("red test:" + graphstr);
     return str1;
   }
+  public void TextToFile(final String str) throws IOException {
+	    final File fileText = new File("randomWalk.txt");
+	    FileWriter fileWriter = null;
+	    try {
+	      fileWriter = new FileWriter(fileText);
+	      fileWriter.write(str);
+	    } catch (IOException e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    }
+	    fileWriter.close();
+	  }
+
 }

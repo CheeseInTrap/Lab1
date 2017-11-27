@@ -13,6 +13,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import control.ShowDirectedGraphControl;
+import entity.Graph;
 import entity.Text;
 
 public class FindMinDistForm {

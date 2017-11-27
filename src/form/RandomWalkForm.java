@@ -8,11 +8,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
-import entity.Text;
 
 public class RandomWalkForm {
 	
-	public RandomWalkForm(Text sm)
+	public RandomWalkForm(entity.Text sm)
 	{
         final JFrame frameQuery = new JFrame();
         final JTabbedPane paneQuery = new JTabbedPane();
